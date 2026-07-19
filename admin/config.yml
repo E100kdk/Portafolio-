@@ -1,0 +1,71 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: 'es'
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "site"
+    label: "Sitio Web"
+    files:
+      - label: "Contenido"
+        name: "content"
+        file: "content.json"
+        format: "json"
+        fields:
+          - label: "Sobre mí (Bio)"
+            name: "bio"
+            widget: "text"
+            hint: "Tu descripción profesional. Deja una línea en blanco para nuevo párrafo."
+          - label: "Email"
+            name: "email"
+            widget: "string"
+          - label: "Teléfono"
+            name: "phone"
+            widget: "string"
+          - label: "Instagram (usuario)"
+            name: "instagram_handle"
+            widget: "string"
+            hint: "Ejemplo: @ricardom.varisco"
+          - label: "Instagram (URL completa)"
+            name: "instagram_url"
+            widget: "string"
+            hint: "Ejemplo: https://instagram.com/ricardom.varisco"
+          - label: "IMDb (URL)"
+            name: "imdb"
+            widget: "string"
+          - label: "ID del Reel principal en Vimeo"
+            name: "vimeo_reel"
+            widget: "string"
+            hint: "Solo el número. Ej: si el link es vimeo.com/842818043 escribe 842818043"
+          - label: "Proyectos / Videos"
+            name: "projects"
+            widget: "list"
+            label_singular: "Proyecto"
+            summary: "{{fields.title}} — {{fields.role}}"
+            fields:
+              - label: "ID de YouTube"
+                name: "youtube_id"
+                widget: "string"
+                hint: "El código al final del link. Ej: en youtube.com/watch?v=xuCVu7cAbds el ID es xuCVu7cAbds"
+              - label: "Título del proyecto"
+                name: "title"
+                widget: "string"
+              - label: "Tu rol"
+                name: "role"
+                widget: "string"
+                hint: "Ej: 1st Camera Assistant, DOP & Camera Operator"
+              - label: "Categoría"
+                name: "category"
+                widget: "select"
+                options:
+                  - { label: "Película", value: "Film" }
+                  - { label: "Serie", value: "Series" }
+                  - { label: "Publicidad", value: "Commercial" }
+                  - { label: "Videoclip", value: "Music Video" }
+                  - { label: "Digital / YouTube", value: "Digital" }
+                  - { label: "Documental", value: "Documentary" }
+                  - { label: "Cortometraje", value: "Short Film" }

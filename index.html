@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ricardo M. Varisco — Director of Photography</title>
+  <meta name="description" content="Ricardo M. Varisco — Director of Photography, Focus Puller & Camera Assistant. Portfolio cinematografico de trabajos en cine, publicidad y videoclips.">
+  <meta property="og:title" content="Ricardo M. Varisco — Director of Photography">
+  <meta property="og:description" content="Portfolio de Ricardo M. Varisco, Director de Fotografia y Camera Assistant.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,200;9..40,300;9..40,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --black:#000;--white:#fff;
+      --g1:#999;--g2:#444;--g3:#1c1c1c;--g4:#0d0d0d;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--black);color:var(--white);
+      font-family:'DM Sans',sans-serif;font-weight:200;
+      overflow-x:hidden;cursor:none;
+    }
+    /* CURSOR */
+    .cursor{
+      position:fixed;width:8px;height:8px;background:#fff;
+      border-radius:50%;pointer-events:none;z-index:9999;
+      transform:translate(-50%,-50%);
+      transition:width .3s,height .3s,opacity .3s;
+      mix-blend-mode:difference;
+    }
+    .cursor.hover{width:40px;height:40px;opacity:.5}
+    /* GRAIN */
+    body::after{
+      content:'';position:fixed;inset:0;pointer-events:none;
+      z-index:9998;opacity:.03;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size:200px 200px;
+    }
+    /* NAV */
+    #nav{
+      position:fixed;top:0;left:0;right:0;z-index:500;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:28px 48px;
+      transition:background .5s,padding .4s,border-color .5s;
+      border-bottom:1px solid transparent;
+    }
+    #nav.scrolled{
+      background:rgba(0,0,0,.88);backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      padding:18px 48px;border-bottom-color:rgba(255,255,255,.07);
+    }
+    .nav-name{
+      font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+      font-weight:300;color:var(--white);text-decoration:none;
+    }
+    .nav-links{list-style:none;display:flex;gap:40px}
+    .nav-links a{
+      font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--g1);text-decoration:none;transition:color .25s;
+    }
+    .nav-links a:hover{color:var(--white)}
+    /* HERO */
+    #hero{
+      width:100%;min-height:100vh;display:flex;
+      flex-direction:column;justify-content:center;
+      padding:0 48px 48px;background:var(--black);
+    }
+    .hero-eyebrow{
+      font-size:9px;letter-spacing:.26em;text-transform:uppercase;
+      color:rgba(255,255,255,.4);margin-bottom:18px;padding-top:100px;
+    }
+    .reel-wrap{
+      position:relative;width:100%;padding-bottom:56.25%;
+      background:var(--g4);overflow:hidden;
+    }
+    .reel-wrap iframe{
+      position:absolute;inset:0;width:100%;height:100%;border:none;
+    }
+    .reel-caption{
+      margin-top:14px;display:flex;
+      justify-content:space-between;align-items:center;
+    }
+    .reel-caption span{
+      font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.4);text-transform:uppercase;
+    }
+    /* IDENTITY */
+    #identity{
+      max-width:1400px;margin:0 auto;padding:80px 48px;
+      border-top:1px solid var(--g3);
+    }
+    .id-name{
+      font-family:'Cormorant Garamond',serif;font-weight:300;
+      font-size:clamp(52px,7.5vw,108px);line-height:.95;letter-spacing:-.025em;
+      margin-bottom:32px;
+    }
+    .id-roles{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0;
+      border-top:1px solid var(--g3);
+      padding-top:28px;
+    }
+    .id-roles p{
+      font-size:clamp(13px,1.4vw,18px);
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.65);
+      padding-right:40px;
+      line-height:1;
+    }
+    .id-roles p + p {
+      padding-left:40px;
+      border-left:1px solid var(--g3);
+    }
+
+    /* FILMOGRAPHY */
+    #filmography{max-width:1400px;margin:0 auto;padding:80px 48px 96px}
+    .section-heading{
+      font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+      color:rgba(255,255,255,.5);margin-bottom:48px;
+    }
+    .film-row{
+      display:grid;grid-template-columns:36px 1fr 260px 110px;
+      gap:0 24px;align-items:center;padding:17px 0;
+      border-bottom:1px solid rgba(255,255,255,.055);
+      text-decoration:none;color:inherit;
+      transition:padding-left .3s cubic-bezier(.25,.46,.45,.94);
+      position:relative;overflow:hidden;
+    }
+    .film-row::before{
+      content:'';position:absolute;left:0;top:0;bottom:0;width:1px;
+      background:var(--white);transform:scaleY(0);transform-origin:top;
+      transition:transform .3s ease;
+    }
+    .film-row:hover{padding-left:14px}
+    .film-row:hover::before{transform:scaleY(1)}
+    .film-row:hover .film-title{color:var(--white)}
+    .film-num{font-size:10px;color:rgba(255,255,255,.3);font-variant-numeric:tabular-nums}
+    .film-title{
+      font-size:15px;font-weight:300;color:rgba(255,255,255,.85);
+      transition:color .25s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .film-role{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:.04em}
+    .film-cat{
+      font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.14em;
+      text-transform:uppercase;text-align:right;
+    }
+    /* WORK GRID */
+    #work{
+      max-width:1400px;margin:0 auto;padding:80px 48px 96px;
+      border-top:1px solid var(--g3);
+    }
+    .work-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:3px;margin-top:48px;
+    }
+
+    .work-card{
+      position:relative;aspect-ratio:16/9;overflow:hidden;
+      cursor:none;background:var(--g4);
+    }
+    .work-card img{
+      width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform .7s cubic-bezier(.25,.46,.45,.94),filter .4s;
+      filter:brightness(.8) saturate(.85);
+    }
+    .work-card:hover img{transform:scale(1.05);filter:brightness(.45) saturate(.7)}
+    .work-overlay{
+      position:absolute;inset:0;display:flex;flex-direction:column;
+      justify-content:space-between;padding:20px 22px;
+      background:linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 55%);
+      transition:background .35s;
+    }
+    .work-card:hover .work-overlay{background:linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.25) 100%)}
+    .work-play-btn{
+      align-self:center;margin:auto 0;
+      width:52px;height:52px;
+      border:1px solid rgba(255,255,255,.6);border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      transition:transform .35s cubic-bezier(.34,1.56,.64,1), border-color .25s;
+      opacity:.7;
+    }
+    .work-card:hover .work-play-btn{transform:scale(1.1);border-color:rgba(255,255,255,1);opacity:1}
+    .work-play-btn svg{margin-left:4px}
+    .work-meta{align-self:flex-end;width:100%}
+    .work-meta-title{font-size:12px;font-weight:300;color:rgba(255,255,255,.9);margin-bottom:3px}
+    .work-meta-role{font-size:9px;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase}
+    /* MODAL */
+    #modal{
+      position:fixed;inset:0;background:rgba(0,0,0,.96);z-index:800;
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;pointer-events:none;transition:opacity .35s;
+    }
+    #modal.open{opacity:1;pointer-events:all}
+    .modal-box{width:88%;max-width:1080px;position:relative}
+    #modal-close{
+      position:absolute;top:-36px;right:0;background:none;border:none;
+      color:var(--g1);font-family:'DM Sans',sans-serif;
+      font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+      cursor:none;transition:color .2s;
+    }
+    #modal-close:hover{color:var(--white)}
+    .modal-iframe-wrap{position:relative;padding-bottom:56.25%}
+    .modal-iframe-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+    /* ABOUT */
+    #about{
+      max-width:1400px;margin:0 auto;padding:80px 48px 96px;
+      border-top:1px solid var(--g3);
+      display:grid;grid-template-columns:200px 1fr;gap:80px;align-items:start;
+    }
+    .about-tag{
+      font-size:10px;letter-spacing:.26em;text-transform:uppercase;
+      color:rgba(255,255,255,.5);padding-top:6px;
+    }
+    .about-body{
+      font-size:17px;line-height:1.9;color:rgba(255,255,255,.75);
+      font-weight:200;max-width:640px;
+    }
+    .about-body strong{color:rgba(255,255,255,.96);font-weight:300}
+    /* CONTACT */
+    #contact{
+      max-width:1400px;margin:0 auto;padding:80px 48px 120px;
+      border-top:1px solid var(--g3);
+    }
+    .contact-headline{
+      font-family:'Cormorant Garamond',serif;font-weight:300;
+      font-size:clamp(36px,5vw,72px);line-height:1.1;
+      letter-spacing:-.02em;margin-bottom:52px;
+    }
+    .contact-headline em{font-style:italic;color:var(--g1)}
+    .contact-row{display:flex;gap:48px;flex-wrap:wrap}
+    .contact-link{display:flex;flex-direction:column;gap:4px;text-decoration:none;color:inherit}
+    .contact-link-label{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+    .contact-link-val{
+      font-size:14px;font-weight:300;color:rgba(255,255,255,.75);
+      border-bottom:1px solid rgba(255,255,255,.18);padding-bottom:3px;
+      transition:color .25s,border-color .25s;
+    }
+    .contact-link:hover .contact-link-val{color:var(--white);border-color:var(--white)}
+    /* FOOTER */
+    footer{
+      max-width:1400px;margin:0 auto;padding:22px 48px;
+      border-top:1px solid rgba(255,255,255,.055);
+      display:flex;justify-content:space-between;
+    }
+    footer span{font-size:9px;letter-spacing:.14em;color:var(--g2);text-transform:uppercase}
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+    /* RESPONSIVE */
+    @media(max-width:1024px){
+      .work-grid{grid-template-columns:repeat(2,1fr)}
+      #identity{flex-direction:column;align-items:flex-start}
+      .id-roles{text-align:left}
+      .film-row{grid-template-columns:28px 1fr 160px}
+      .film-cat{display:none}
+    }
+    @media(max-width:768px){
+      #nav,#hero{padding-left:24px;padding-right:24px}
+      #identity,#filmography,#work,#about,#contact,footer{padding-left:24px;padding-right:24px}
+      .id-name{font-size:52px}
+      .id-roles{flex-direction:column;gap:16px}
+      .id-roles p + p{border-left:none;padding-left:0;border-top:1px solid var(--g3);padding-top:16px}
+      .work-grid{grid-template-columns:1fr}
+      .film-row{grid-template-columns:28px 1fr}
+      .film-role,.film-cat{display:none}
+      #about{grid-template-columns:1fr;gap:20px}
+      .contact-row{flex-direction:column;gap:28px}
+      .nav-links{gap:24px}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#" class="nav-name">Ricardo M. Varisco</a>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#filmography">Credits</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <p class="hero-eyebrow reveal">Showreel &mdash; 2024</p>
+    <div class="reel-wrap reveal">
+      <iframe
+        id="reel-iframe"
+        src="https://player.vimeo.com/video/842818043?title=0&byline=0&portrait=0&color=ffffff&dnt=1"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+        title="Ricardo M. Varisco Showreel 2024"></iframe>
+    </div>
+    <div class="reel-caption reveal">
+      <span>Director of Photography &nbsp;&middot;&nbsp; Focus Puller &nbsp;&middot;&nbsp; Camera Assistant</span>
+      <span>Vimeo</span>
+    </div>
+  </section>
+
+  <!-- IDENTITY -->
+  <section id="identity">
+    <h1 class="id-name reveal">Ricardo<br>M. Varisco</h1>
+    <div class="id-roles reveal">
+      <p>Director of Photography</p>
+      <p>Focus Puller</p>
+      <p>Camera Assistant</p>
+    </div>
+  </section>
+
+
+  <!-- WORK GRID -->
+  <section id="work">
+    <h2 class="section-heading reveal">Work</h2>
+    <div id="work-grid" class="work-grid"></div>
+  </section>
+
+  <!-- FILMOGRAPHY -->
+  <section id="filmography" style="border-top:1px solid var(--g3)">
+    <h2 class="section-heading reveal">Credits</h2>
+    <div id="filmography-list"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-tag reveal">About</div>
+    <p id="bio-text" class="about-body reveal"></p>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h2 class="contact-headline reveal">Let's work<br><em>together.</em></h2>
+    <div class="contact-row">
+      <a id="link-email" class="contact-link reveal" href="#">
+        <span class="contact-link-label">Email</span>
+        <span id="val-email" class="contact-link-val"></span>
+      </a>
+      <a id="link-phone" class="contact-link reveal" href="#">
+        <span class="contact-link-label">Phone</span>
+        <span id="val-phone" class="contact-link-val"></span>
+      </a>
+      <a id="link-instagram" class="contact-link reveal" href="#" target="_blank" rel="noopener">
+        <span class="contact-link-label">Instagram</span>
+        <span id="val-instagram" class="contact-link-val"></span>
+      </a>
+      <a id="link-imdb" class="contact-link reveal" href="#" target="_blank" rel="noopener">
+        <span class="contact-link-label">IMDb</span>
+        <span class="contact-link-val">Ricardo M. Varisco</span>
+      </a>
+      <a id="link-vimeo" class="contact-link reveal" href="https://vimeo.com" target="_blank" rel="noopener">
+        <span class="contact-link-label">Vimeo</span>
+        <span class="contact-link-val">Showreels</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>&copy; 2024 Ricardo M. Varisco</span>
+    <span>Director of Photography &mdash; Spain</span>
+  </footer>
+
+  <!-- MODAL -->
+  <div id="modal" role="dialog" aria-modal="true" aria-label="Video player">
+    <div class="modal-box">
+      <button id="modal-close">&#x2715; &nbsp;Cerrar</button>
+      <div class="modal-iframe-wrap">
+        <iframe id="modal-iframe" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen title="Video"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Default content (fallback when running locally) ──
+    const DEFAULT = {
+      vimeo_reel: '842818043',
+      bio: "I'm a committed and dedicated camera professional with hands-on experience across film, television, branded content and documentary production. I have worked with leading platforms and brands including Netflix, Movistar, Disney, Carrefour and Prime Video, which has given me a comprehensive understanding of every role within the camera department.\n\nHaving worked across positions — from DOP to 2nd Camera Assistant — I bring a full-picture perspective on how the department operates and what it needs. I speak English, Spanish and Italian fluently and thrive in fast-paced, collaborative environments where precision and adaptability matter.",
+      email: 'ricardomvarisco@gmail.com',
+      phone: '+34 689 785 516',
+      instagram_handle: '@ricardom.varisco',
+      instagram_url: 'https://instagram.com/ricardom.varisco',
+      imdb: 'https://www.imdb.com/es-es/name/nm14940751/',
+      projects: [
+        { youtube_id: 'xuCVu7cAbds', title: 'Videoclip',        role: 'DOP & Camera Operator',       category: 'Music Video' },
+        { youtube_id: 'PhEcMOAGqfk', title: 'Pelicula',         role: '1st Camera Assistant',         category: 'Film'        },
+        { youtube_id: 'AD2CVllUBss', title: 'La Bestia',        role: '2nd Camera Assistant',         category: 'Film'        },
+        { youtube_id: 'r1_zX-7reTM', title: 'Netflix',          role: 'Camera Assistant',             category: 'Series'      },
+        { youtube_id: 'eTNjgBAvXvI', title: 'Carrefour',        role: '1st Camera Assistant',         category: 'Commercial'  },
+        { youtube_id: 'mUAkknEZvSM', title: 'Movistar',         role: '2nd Camera Assistant',         category: 'Commercial'  },
+        { youtube_id: '5g87Q-AY-6w', title: 'Videoclip',        role: '1st Camera Assistant & Loader',category: 'Music Video' },
+        { youtube_id: '_ORGgr3-a_M', title: 'Videoclip',        role: '1st Camera Assistant',         category: 'Music Video' },
+        { youtube_id: 'pKdHyTo_rxs', title: 'Produccion Digital',role: '1st Camera Assistant',        category: 'Digital'     }
+      ]
+    };
+
+    function renderContent(d) {
+      const PLAY = `<svg width="13" height="16" viewBox="0 0 13 16" fill="white"><path d="M0 0L13 8L0 16Z"/></svg>`;
+
+      // Reel
+      const ri = document.getElementById('reel-iframe');
+      if (ri) ri.src = `https://player.vimeo.com/video/${d.vimeo_reel}?title=0&byline=0&portrait=0&color=ffffff&dnt=1`;
+
+      // Bio
+      const bio = document.getElementById('bio-text');
+      if (bio) bio.innerHTML = d.bio.replace(/\n\n/g, '<br><br>');
+
+      // Contact
+      const set = (id, href, val) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.href = href;
+        const v = el.querySelector('[id^="val-"]');
+        if (v) v.textContent = val;
+      };
+      set('link-email',     `mailto:${d.email}`,  d.email);
+      set('link-phone',     `tel:${d.phone}`,      d.phone);
+      set('link-instagram', d.instagram_url,       d.instagram_handle);
+      set('link-imdb',      d.imdb,                'Ricardo M. Varisco');
+
+      // Work grid
+      const wg = document.getElementById('work-grid');
+      if (wg) wg.innerHTML = d.projects.map(p => `
+        <div class="work-card reveal" data-src="https://www.youtube.com/embed/${p.youtube_id}?autoplay=1&rel=0">
+          <img src="https://img.youtube.com/vi/${p.youtube_id}/maxresdefault.jpg" alt="${p.title}" loading="lazy">
+          <div class="work-overlay">
+            <div class="work-play-btn">${PLAY}</div>
+            <div class="work-meta">
+              <div class="work-meta-title">${p.title}</div>
+              <div class="work-meta-role">${p.role}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      // Filmography
+      const fl = document.getElementById('filmography-list');
+      if (fl) fl.innerHTML = d.projects.map((p, i) => `
+        <a class="film-row reveal" href="https://www.youtube.com/watch?v=${p.youtube_id}" target="_blank" rel="noopener">
+          <span class="film-num">${String(i+1).padStart(2,'0')}</span>
+          <span class="film-title">${p.title}</span>
+          <span class="film-role">${p.role}</span>
+          <span class="film-cat">${p.category}</span>
+        </a>
+      `).join('');
+
+      initAll();
+    }
+
+    function initAll() {
+      // Cursor
+      const cursor = document.getElementById('cursor');
+      document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top  = e.clientY + 'px';
+      });
+      document.querySelectorAll('a,button,.work-card').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+      });
+
+      // Nav scroll
+      const nav = document.getElementById('nav');
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 60);
+      }, { passive: true });
+
+      // Scroll reveal
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+      document.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = (i % 5) * 0.06 + 's';
+        obs.observe(el);
+      });
+
+      // Modal
+      const modal      = document.getElementById('modal');
+      const modalFrame = document.getElementById('modal-iframe');
+      const closeBtn   = document.getElementById('modal-close');
+      document.querySelectorAll('.work-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const src = card.dataset.src;
+          if (!src) return;
+          modalFrame.src = src;
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      function closeModal() {
+        modal.classList.remove('open');
+        modalFrame.src = '';
+        document.body.style.overflow = '';
+      }
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+      // Fallback thumbnails
+      document.querySelectorAll('.work-card img').forEach(img => {
+        img.addEventListener('error', function () {
+          const m = this.src.match(/\/vi\/([^/]+)\//);
+          if (m) this.src = 'https://img.youtube.com/vi/' + m[1] + '/hqdefault.jpg';
+        });
+      });
+    }
+
+    // Load content.json, fallback to defaults
+    fetch('/content.json')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => renderContent(data))
+      .catch(() => renderContent(DEFAULT));
+
+    // Netlify Identity redirect
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', user => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
